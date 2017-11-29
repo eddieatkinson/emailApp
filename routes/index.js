@@ -6,10 +6,6 @@ var config = require('../config.js')
 var transport = {
 	host: 'smtp.gmail.com',
 	auth: config.auth
-	// auth: {
-	// 	user: 'hayescapers45583@gmail.com',
-	// 	pass: 'hambone45583'
-	// }
 }
 
 var transporter = nodemailer.createTransport(transport);
@@ -37,16 +33,16 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/send', (req, res)=>{
-	var email = req.body.email;
-	var content = req.body.message,
-		name = req.body.name,
-		phone = req.body.phone,
-		finalMessage = `${content} \n\n phone: ${phone} \n email: ${email}`
+	var { email, message, name, phone } = req.body;
+	// var message = req.body.message,
+	// 	name = req.body.name,
+	// 	phone = req.body.phone,
+		finalMessage = `${message} \n\n name: ${name} \n phone: ${phone} \n email: ${email}`
 
 	var mail = {
-		from: email,
+		from: 'Your website!',
 		to: 'eddiebatkinson@gmail.com',
-		subject: 'test',
+		subject: name,
 		text: finalMessage
 	}
 
